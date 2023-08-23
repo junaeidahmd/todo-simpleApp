@@ -133,31 +133,45 @@ btn.addEventListener('click',function(){
     function setupListItemDoubleClick(listItem) {
 
         const EditItem = listItem.querySelector('.input-list');
-        console.log(EditItem);
 
         EditItem.addEventListener('dblclick',function(e){
             console.log(e);
             const listItemValue = listItem.textContent.trim();
-            listItem.innerHTML = `<input type='text' class='form-control input-list' id='inputList'  value='${listItemValue}'>
-            <i class="bi bi-check"></i> <i class="bi bi-x"></i> `;
-        
-    const saveIcon = listItem.querySelector('.bi-check');
-    const deleted = listItem.querySelector('.bi-x');
-
-    const input = listItem.querySelector('#inputList');
-    deleted.addEventListener('click',function(){
-        listItem.remove();
-            setupListItemDoubleClick(listItem);
+            listItem.innerHTML = `<input type='text' class='form-control input-list mt-2 mb-2' id='inputList'  value='${listItemValue}'>
+            <i class="bi bi-check"></i> <i class="bi bi-x"></i>`;
+            
+        const saveIcon = listItem.querySelectorAll('.bi-check');
+        const deleted = listItem.querySelectorAll('.bi-x');
+    
+            const input = listItem.querySelectorAll('#inputList');
+                
+            deleted.forEach(function(deleted){
+                deleted.addEventListener('click',function(){
+                    listItem.remove();
+                        setupListItemDoubleClick(listItem);
+                        let valueToRemove = 1;
+                        array.filter((item)=>{
+                            item.slice(valueToRemove,1)
+                        })
+                    })
+            })
+            saveIcon.forEach(function(saveIcon){
+                saveIcon.addEventListener('click', function() {
+                    input.forEach(function(updatedValue){
+                        const InputValue =updatedValue.value
+    
+                        listItem.innerHTML = `<li class="d-flex align-items-revert gap-1 input-list  overflow-hidden"><input type='checkbox' id='checktext'>${InputValue}</li>`;
+                        setupListItemDoubleClick(listItem);
+                        newListCheckbox(listItem)
+                    })
+                });
+            })
+    
+    
+    
         })
-            saveIcon.addEventListener('click', function() {
-                const updatedValue = input.value;
-                listItem.innerHTML = `<li class="d-flex align-items-revert gap-1 input-list  overflow-hidden"><input type='checkbox' id='checktext'>${updatedValue}</li>`;
-                setupListItemDoubleClick(listItem);
-                newListCheckbox(listItem)
-            });
 
 
-    })
 
 }
 
@@ -176,7 +190,7 @@ function newListCheckbox(newList){
 function movement(){
     const newList = document.createElement('div');
     array.forEach(function(items){
-    newList.style.marginTop='10px';
+    newList.style.margingitTop='10px';
     newList.innerHTML = `<li class="d-flex align-items-revert gap-1 input-list  overflow-hidden"><input type='checkbox' id='checktext'>${items}</li>`;
         lists.appendChild(newList)
     })

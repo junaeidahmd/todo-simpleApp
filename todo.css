@@ -10,11 +10,11 @@ body{
 ul li{
     list-style: none;
 }
-ul{
+ul div{
   position:relative;
 
 }
-ul{
+ul {
   padding:0;
 }
 .lists .bi-check{
