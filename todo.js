@@ -149,16 +149,17 @@ btn.addEventListener('click',function(){
                 deleted.addEventListener('click',function(){
                     listItem.remove();
                         setupListItemDoubleClick(listItem);
-                        let valueToRemove = 1;
-                        array.filter((item)=>{
-                            item.slice(valueToRemove,1)
-                        })
+                        if (array.length > 0) {
+                            // Remove the first string from the array
+                            array.shift();
+                        }
+                        console.log(array);
                     })
             })
             saveIcon.forEach(function(saveIcon){
                 saveIcon.addEventListener('click', function() {
                     input.forEach(function(updatedValue){
-                        const InputValue =updatedValue.value
+                        const InputValue = updatedValue.value
     
                         listItem.innerHTML = `<li class="d-flex align-items-revert gap-1 input-list  overflow-hidden"><input type='checkbox' id='checktext'>${InputValue}</li>`;
                         setupListItemDoubleClick(listItem);
