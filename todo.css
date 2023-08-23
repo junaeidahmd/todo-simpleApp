@@ -1,0 +1,77 @@
+body{
+    background-color: black;
+
+}
+
+.card{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding:2rem;
+}
+ul li{
+    list-style: none;
+}
+ul{
+  position:relative;
+
+}
+ul{
+  padding:0;
+}
+.lists .bi-check{
+  position: absolute;
+  top: 7px;
+  right: 5px;
+  color:green;
+}
+.lists .bi-x{
+  position: absolute;
+  top: 7px;
+  right: 20px;
+  color:rgb(244, 7, 7);
+}
+.checked {
+    text-decoration: line-through;
+}
+  .input-box {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .text-shadow {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    opacity: 0.3;
+    padding:0.1rem 1rem;
+    background-color: rgb(185, 185, 185);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    color:black;
+    border-top-left-radius:50px;
+    pointer-events: none;
+  }
+  .input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback){
+    border-radius: 2px !important;
+  }
+  .form-control:focus{
+    outline: none !important;
+    box-shadow:none !important;
+}
+.list-input input.active{
+  display: none;
+}
+body{
+  background-color: black;
+} 
+li{
+  list-style-type: none;
+  padding:8px;
+  background-color: brown;
+  border-radius:20px;
+  margin-top:1rem;
+  list-style: none;
+}
+.input-list{
+
+}
