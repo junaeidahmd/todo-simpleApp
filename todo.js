@@ -1,3 +1,5 @@
+/** @format */
+
 // const itemsText = document.querySelector('#items-text');
 // const todoList = document.querySelector('ul');
 // const btn = document.querySelector('#basic-addon1');
@@ -63,9 +65,6 @@
 //     });
 // }
 
-
-
-
 // itemsText.addEventListener('input', function(e) {
 //     clearTimeout(typingTimeout);
 
@@ -78,7 +77,7 @@
 //         } else {
 //             shadowElement.style.display = 'none';
 //         }
-//     }, 100); 
+//     }, 100);
 // });
 
 // itemsText.addEventListener('keydown', function(e) {
@@ -113,101 +112,88 @@
 //     }
 // });
 
-const input = document.querySelector('#input');
-const btn = document.querySelector('.btn');
-const lists =document.querySelector('.lists');
+const input = document.querySelector("#input");
+const btn = document.querySelector(".btn");
+const lists = document.querySelector(".lists");
 let array = [];
 
-btn.addEventListener('click',function(){
-    const inputValue = input.value;
+btn.addEventListener("click", function () {
+  const inputValue = input.value;
 
-    if(inputValue !== '' ){
-        array.push(inputValue)
-        input.value ='';
-        console.log(array);
-        movement(); 
-    }
+  if (inputValue !== "") {
+    array.push(inputValue);
+    input.value = "";
+    console.log(array);
+    movement();
+  }
 });
 
+function setupListItemDoubleClick(listItem) {
+  const EditItem = listItem.querySelector(".input-list");
 
-    function setupListItemDoubleClick(listItem) {
-
-        const EditItem = listItem.querySelector('.input-list');
-
-        EditItem.addEventListener('dblclick',function(e){
-            console.log(e);
-            const listItemValue = listItem.textContent.trim();
-            listItem.innerHTML = `<input type='text' class='form-control input-list mt-2 mb-2' id='inputList'  value='${listItemValue}'>
+  EditItem.addEventListener("dblclick", function (e) {
+    console.log(e);
+    const listItemValue = listItem.textContent.trim();
+    listItem.innerHTML = `<input type='text' class='form-control input-list mt-2 mb-2' id='inputList'  value='${listItemValue}'>
             <i class="bi bi-check"></i> <i class="bi bi-x"></i>`;
-            
-        const saveIcon = listItem.querySelectorAll('.bi-check');
-        const deleted = listItem.querySelectorAll('.bi-x');
-    
-            const input = listItem.querySelectorAll('#inputList');
-                
-            deleted.forEach(function(deleted){
-                deleted.addEventListener('click',function(){
-                    listItem.remove();
-                        setupListItemDoubleClick(listItem);
-                        if (array.length > 0) {
-                            // Remove the first string from the array
-                            array.shift();
-                        }
-                        console.log(array);
-                    })
-            })
-            saveIcon.forEach(function(saveIcon){
-                saveIcon.addEventListener('click', function() {
-                    input.forEach(function(updatedValue){
-                        const InputValue = updatedValue.value
-    
-                        listItem.innerHTML = `<li class="d-flex align-items-revert gap-1 input-list  overflow-hidden"><input type='checkbox' id='checktext'>${InputValue}</li>`;
-                        setupListItemDoubleClick(listItem);
-                        newListCheckbox(listItem)
-                    })
-                });
-            })
-    
-    
-    
-        })
 
+    const saveIcon = listItem.querySelectorAll(".bi-check");
+    const deleted = listItem.querySelectorAll(".bi-x");
 
+    const input = listItem.querySelectorAll("#inputList");
 
-}
-
-
-function newListCheckbox(newList){
-    const checkbox = newList.querySelector('#checktext');
-    const list = newList.querySelector('.input-list')
-    checkbox.addEventListener('change',function(){
-        if(checkbox.checked){
-            list.style.textDecoration = 'line-through'
-        }else{
-            list.style.textDecoration = 'none'
+    deleted.forEach(function (deleted) {
+      deleted.addEventListener("click", function () {
+        listItem.remove();
+        setupListItemDoubleClick(listItem);
+        if (array.length > 0) {
+          array.shift();
         }
-    })
+        console.log(array);
+      });
+    });
+    saveIcon.forEach(function (saveIcon) {
+      saveIcon.addEventListener("click", function () {
+        input.forEach(function (updatedValue) {
+          const InputValue = updatedValue.value;
+          listItem.innerHTML = `<li class="d-flex align-items-center gap-1 input-list  overflow-hidden"><input type='checkbox' id='checktext'>${InputValue}</li>`;
+          setupListItemDoubleClick(listItem);
+          newListCheckbox(listItem);
+        });
+      });
+    });
+  });
 }
-function movement(){
-    const newList = document.createElement('div');
-    array.forEach(function(items){
-    newList.style.margingitTop='10px';
-    newList.innerHTML = `<li class="d-flex align-items-revert gap-1 input-list  overflow-hidden"><input type='checkbox' id='checktext'>${items}</li>`;
-        lists.appendChild(newList)
-    })
-    newListCheckbox(newList)
-    setupListItemDoubleClick(newList)
-}
-input.addEventListener('keydown',function(e){
-    const inputValue = input.value;
-    if(e.key == 'Enter'){
-        if(inputValue !== '' ){
-            array.push(inputValue)
-            input.value ='';
-            console.log(array);
-            movement();
-        }
+
+function newListCheckbox(newList) {
+  const checkbox = newList.querySelector("#checktext");
+  const list = newList.querySelector(".input-list");
+  checkbox.addEventListener("change", function () {
+    if (checkbox.checked) {
+      list.style.textDecoration = "line-through";
+    } else {
+      list.style.textDecoration = "none";
     }
-
-})
-
+  });
+}
+function movement() {
+  const newList = document.createElement("div");
+  array.forEach(function (items) {
+    newList.style.margingitTop = "10px";
+    newList.innerHTML = `<li class="d-flex align-items-center gap-1 input-list  overflow-hidden"><input type='checkbox' id='checktext'>${items}</li>`;
+    lists.appendChild(newList);
+  });
+  newListCheckbox(newList);
+  setupListItemDoubleClick(newList);
+}
+input.addEventListener("keydown", function (e) {
+  const inputValue = input.value;
+  if (e.key == "Enter") {
+    if (inputValue !== "") {
+      array.push(inputValue);
+      input.value = "";
+      console.log(array);
+      movement();
+    }
+  }
+});
